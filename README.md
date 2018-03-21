@@ -14,4 +14,4 @@ Next you can clone this repository by using:
 
 For notification I use the PUSHOVER.NET service to send error notifications and graphs to my iPhone. My current problems with KABEL DEUTSCHLAND produced the following notifications:
 
-<img src="IMG_0309.jpg">
+<img src="IMG_0309.PNG">

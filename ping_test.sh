@@ -2,7 +2,7 @@ CURRENT_LOG=current_ping_problems.log
 PERMANENT_LOG=ping_problems.log
 
 if [ "$1" == "check" ]; then
-   ping -c 1 www.spiegel.de
+   ping -c 1 google.com
    if [ $? != 0 ]; then
       echo "`date` `curl -s http://192.168.0.1/xml/CmSystemStatus.xml | grep uptime | tr -d "</cm_system_uptime>PST" | tr "DHM" " " | awk {'print "uptime " $1 ":" $2 ":" $3 ":" $4 '}`" >>$CURRENT_LOG
    fi

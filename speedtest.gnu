@@ -19,6 +19,7 @@ n = 700
 
 set datafile separator ","
 
+# find the max value for the UPSTREAM - we position the MEAN text above it
 set output 'speedtest.png'
 plot "< tail -n 700 speedtest.csv | tac" using ($7/1000000)
 max_y = GPVAL_DATA_Y_MAX
@@ -28,7 +29,7 @@ set output 'speedtest.png'
 
 f(x) = mean_y
 fit f(x) "< tail -n 700 speedtest.csv | tac" using 7:7 via mean_y
-set label 1 gprintf("Mean=%.f MBit", mean_y/1000000) at 3, max_y + 2
+set label 1 gprintf("%.f MBit mean", mean_y/1000000) at 1, max_y + 1
 
 plot mean_y/1000000 title "" with lines, \
      "< tail -n 700 speedtest.csv | tac" using ($7/1000000) title "downstream" with lines, \

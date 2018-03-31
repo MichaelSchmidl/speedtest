@@ -3,8 +3,6 @@ set terminal png
 set grid ytics lc rgb "#bbbbbb" lw 1 lt 0
 set grid xtics lc rgb "#bbbbbb" lw 1 lt 0
 
-set output 'speedtest.png'
-
 #set arrow from graph 0,first 100.0 to graph 1,first 100.0 nohead lc rgb "#FF00FF" front
 #set arrow from graph 0,first 12.0 to graph 1,first 12.0 nohead lc rgb "#FF0000" front
 
@@ -21,9 +19,16 @@ n = 700
 
 set datafile separator ","
 
+set output 'speedtest.png'
+plot "< tail -n 700 speedtest.csv | tac" using ($7/1000000)
+max_y = GPVAL_DATA_Y_MAX
+min_y = GPVAL_DATA_Y_MIN
+
+set output 'speedtest.png'
+
 f(x) = mean_y
 fit f(x) "< tail -n 700 speedtest.csv | tac" using 7:7 via mean_y
-set label 1 gprintf("Mean=%.f MBit", mean_y/1000000) at 3, 97
+set label 1 gprintf("Mean=%.f MBit", mean_y/1000000) at 3, max_y + 2
 
 plot mean_y/1000000 title "" with lines, \
      "< tail -n 700 speedtest.csv | tac" using ($7/1000000) title "downstream" with lines, \

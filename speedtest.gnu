@@ -1,3 +1,5 @@
+set fit logfile '/dev/null'
+
 set terminal png
 
 set grid ytics lc rgb "#bbbbbb" lw 1 lt 0

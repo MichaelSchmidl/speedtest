@@ -26,8 +26,8 @@ f(x) = mean_y
 fit f(x) "< tail -n 700 speedtest.csv | tac" using ($7/1000000):($7/1000000) via mean_y
 stddev_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
 
-set label 1 gprintf("%.f MBit mean", mean_y) at 1, mean_y+stddev_y+1
-set label 2 gprintf("%.f sigma", stddev_y) at 1, mean_y-stddev_y-2
+set label 1 gprintf("%.f MBit mean download", mean_y) at 1, mean_y+stddev_y+1
+set label 2 gprintf("sigma=%.f", stddev_y) at 1, mean_y-stddev_y-2
 plot (mean_y+stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "#bbbbdd", \
      (mean_y-stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "#bbbbdd", \
      mean_y title "" with lines, \

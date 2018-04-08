@@ -1,13 +1,13 @@
 set fit logfile '/dev/null'
 set macros
-set terminal png
+set terminal pngcairo size 1024,768
 set grid ytics lc rgb "grey" lw 1 lt 0
 set grid xtics lc rgb "grey" lw 1 lt 0
 set format y "%3.f MBit"
 
 set datafile separator ","
 messwerte="< tail -n 700 speedtest.csv | tac"
-set xtics ("now" 0*96, "1" 1*96, "2" 2*96, "3" 3*96, "4" 4*96, "5" 5*96, "6" 6*96, "7" 7*96, "8" 8*96, "9" 9*96, "10" 10*96, "11" 11*96, "12" 12*96, "13" 13*96, "14" 14*96)
+set xtics ("now" 0*96, "1d ago" 1*96, "2d ago" 2*96, "3d ago" 3*96, "4d ago" 4*96, "5d ago" 5*96, "6d ago" 6*96, "7d ago" 7*96, "8d ago" 8*96, "9" 9*96, "10" 10*96, "11" 11*96, "12" 12*96, "13" 13*96, "14" 14*96)
 
 MB = "1000000"
 
@@ -35,11 +35,8 @@ set label 2 gprintf("σ=%.f", stddev_y) at 1, min_y+1.5
 plot init(0) title "", \
      (mean_y+stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "light-grey", \
      (mean_y-stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "light-grey", \
-     mean_y title "" with lines lw 3 lc rgb "dark-red", \
-     messwerte using ($7/@MB) title "" pt 1 ps 0.5 lw 1 lc rgb "light-red", \
-     messwerte using ($7/@MB) title "" with lines lw 0.2 lc rgb "light-red", \
-     messwerte using ($8/@MB) title "" with lines lc rgb "blue", \
-     messwerte using (avg4($7/@MB)) title "" with lines lw 2 lc rgb "dark-red", \
-     messwerte using (sum = sum + ($7/@MB), sum/($0+1)) title "" with lines lw 2 lc rgb "dark-green"
+     mean_y title "" with lines lw 2 lc rgb "dark-red", \
+     messwerte using ($7/@MB) title "downstream" with lines lw 1 lc rgb "red", \
+     messwerte using ($8/@MB) title "upstream" with lines lc rgb "blue"
 
 

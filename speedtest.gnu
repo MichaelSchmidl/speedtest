@@ -1,9 +1,10 @@
 set fit logfile '/dev/null'
 set macros
-set terminal pngcairo size 1024,768
+set terminal png size 1024,768
 set grid ytics lc rgb "grey" lw 1 lt 0
 set grid xtics lc rgb "grey" lw 1 lt 0
 set format y "%3.f MBit"
+set style fill transparent solid 0.2 noborder
 
 set datafile separator ","
 messwerte="< tail -n 700 speedtest.csv | tac"
@@ -30,8 +31,8 @@ init(x) = (back1 = back2 = back3 = back4 = sum = 0)
 
 set output 'speedtest.png'
 
-set label 1 gprintf("%.f MBit mean", mean_y) at 1, max_y+1.5
-set label 2 gprintf("σ=%.f", stddev_y) at 1, min_y+1.5
+set label 1 gprintf("%.f MBit mean", mean_y) at 1, max_y+1.5 front
+set label 2 gprintf("σ=%.f", stddev_y) at 1, min_y+1.5 front
 plot init(0) title "", \
      (mean_y+stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "light-grey", \
      (mean_y-stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "light-grey", \

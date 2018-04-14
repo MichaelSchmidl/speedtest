@@ -30,7 +30,7 @@ init(x) = (back1 = back2 = back3 = back4 = sum = 0)
 
 set output 'speedtest.png'
 
-set label 1 gprintf("%.f MBit mean", mean_y) at 1, mean_y+stddev_y+1.5
+set label 1 gprintf("%.f MBit mean", mean_y) at 1, max_y+1.5
 set label 2 gprintf("σ=%.f", stddev_y) at 1, min_y+1.5
 plot init(0) title "", \
      (mean_y+stddev_y) title "" with filledcurves y1=mean_y lt 1 lc rgb "light-grey", \

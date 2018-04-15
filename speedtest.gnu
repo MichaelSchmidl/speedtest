@@ -4,7 +4,7 @@ set terminal png size 1024,768
 set grid ytics lc rgb "grey" lw 1 lt 0
 set grid xtics lc rgb "grey" lw 1 lt 0
 set format y "%3.f MBit"
-set style fill transparent solid 0.2 noborder
+set style fill transparent solid 0.5 noborder
 
 set datafile separator ","
 messwerte="< tail -n 700 speedtest.csv | tac"

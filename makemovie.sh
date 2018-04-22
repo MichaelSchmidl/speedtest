@@ -1,8 +1,8 @@
-TMPDIR=tmp
+MYDIR=tmp
 
-rm -rf $TMPDIR
-mkdir $TMPDIR
-cd $TMPDIR
+rm -rf $MYDIR
+mkdir $MYDIR
+cd $MYDIR
 
 CSV_FILE="../speedtest.csv"
 MEASUREMENTS_PER_HOUR=4

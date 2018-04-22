@@ -38,8 +38,8 @@ fit f(x) messwerte using ($3/@MB):($3/@MB) via meanup_y
 stddevup_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
 
 set output 'speedtest.png'
-set label 1 sprintf("%.f MBit down with σ=%.f %s", meandown_y, stddevdown_y, now) at 1, maxdown_y+0.5 front
-set label 2 sprintf("%.f MBit up with σ=%.f", meanup_y, stddevup_y) at 1, maxup_y+0.5 front
+set label 1 sprintf("%.f MBit, σ=%.f, %s UTC", meandown_y, stddevdown_y, now) at 1, maxdown_y+0.5 front
+set label 2 sprintf("%.f MBit, σ=%.f", meanup_y, stddevup_y) at 1, maxup_y+0.5 front
 plot (meandown_y+stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
      (meandown_y-stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
      meandown_y title "" with lines lw 2 lc rgb "dark-red", \

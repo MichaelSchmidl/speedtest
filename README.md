@@ -15,3 +15,6 @@ Next you can clone this repository by using:
 For notification I use the PUSHOVER.NET service to send error notifications and graphs to my iPhone (see the template scripts for notification). My current problems with KABEL DEUTSCHLAND produced the following notifications:
 
 <img src="IMG_0309.PNG">
+ 
+ To start the test scripts on a regular basis and send reports at approbiate times, you will have to setup crontab jobs using the test scripts.
+ 

@@ -1,3 +1,4 @@
+set fit quiet
 set fit logfile '/dev/null'
 set macros
 set terminal png size 1024,768

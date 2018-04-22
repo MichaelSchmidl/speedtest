@@ -42,10 +42,10 @@ set label 2 sprintf("%.f MBit up with σ=%.f", meanup_y, stddevup_y) at 1, maxup
 plot (meandown_y+stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
      (meandown_y-stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
      meandown_y title "" with lines lw 2 lc rgb "dark-red", \
-     messwerte using ($7/@MB) title "downstream" with lines lw 1 lc rgb "red", \
      (meanup_y+stddevup_y) title "" with filledcurves y1=meanup_y lt 1 lc rgb "light-grey", \
      (meanup_y-stddevup_y) title "" with filledcurves y1=meanup_y lt 1 lc rgb "light-grey", \
      meanup_y title "" with lines lw 2 lc rgb "dark-red", \
+     messwerte using ($7/@MB) title "downstream" with lines lw 1 lc rgb "red", \
      messwerte using ($8/@MB) title "upstream" with lines lc rgb "blue"
 
 

@@ -6,7 +6,7 @@ For best results use a RaspberryPI 3b or better. You will have to connect the PI
 
 These prerequisities are required on the PI:
 
-<code><b>sudo apt-get install git curl gnuplot speedtest-cli</b></code>
+<code><b>sudo apt-get install git curl gnuplot speedtest-cli imagemagick</b></code>
 
 Next you can clone this repository by using:
 

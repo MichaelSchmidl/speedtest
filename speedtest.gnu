@@ -16,36 +16,19 @@ N_MESSWERTE = "700"
 messwerte = "< tail -n 700 speedtest.csv | tac | awk '{print $4\",\"$7\",\"$8}' FS=,"
 now = system("tail -n 1 speedtest.csv | awk '{print $4}' FS=, | awk '{ gsub(/\\.[0-9]+/, \"\"); print}' | sed s/T/\" \"/g  | sed s/Z//g")
 
-# find the max and min value for the DOWNSTREAM - we position the MEAN text above it
-set output 'speedtest.png'
-plot messwerte using ($2/@MB)
-maxdown_y = GPVAL_DATA_Y_MAX
-mindown_y = GPVAL_DATA_Y_MIN
-
-# find the max and min value for the UPSTREAM - we position the MEAN text above it
-plot messwerte using ($3/@MB)
-maxup_y = GPVAL_DATA_Y_MAX
-minup_y = GPVAL_DATA_Y_MIN
-
-# find the mean value of the downstream values
-f(x) = meandown_y
-fit f(x) messwerte using ($2/@MB):($2/@MB) via meandown_y
-stddevdown_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
-
-# find the mean value of the upstream values
-f(x) = meanup_y
-fit f(x) messwerte using ($3/@MB):($3/@MB) via meanup_y
-stddevup_y = sqrt(FIT_WSSR / (FIT_NDF + 1 ))
+# set MAX, MIN, MEAN and STDDEV for the two data columns
+stats messwerte using  ($2/@MB) name  "downstream" nooutput
+stats messwerte using  ($3/@MB) name  "upstream" nooutput
 
 set output 'speedtest.png'
-set label 1 sprintf("%.f MBit, σ=%.f, %s UTC", meandown_y, stddevdown_y, now) at 1, maxdown_y+0.5 front
-set label 2 sprintf("%.f MBit, σ=%.f", meanup_y, stddevup_y) at 1, maxup_y+0.5 front
-plot (meandown_y+stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
-     (meandown_y-stddevdown_y) title "" with filledcurves y1=meandown_y lt 1 lc rgb "light-grey", \
-     meandown_y title "" with lines lw 2 lc rgb "dark-red", \
-     (meanup_y+stddevup_y) title "" with filledcurves y1=meanup_y lt 1 lc rgb "light-grey", \
-     (meanup_y-stddevup_y) title "" with filledcurves y1=meanup_y lt 1 lc rgb "light-grey", \
-     meanup_y title "" with lines lw 2 lc rgb "dark-red", \
+set label 1 sprintf("%.f MBit, σ=%.f, %s UTC", downstream_mean, downstream_stddev, now) at 1, downstream_max+0.5 front
+set label 2 sprintf("%.f MBit, σ=%.f", upstream_mean, upstream_stddev) at 1, upstream_max+0.5 front
+plot (downstream_mean+downstream_stddev) title "" with filledcurves y1=downstream_mean lt 1 lc rgb "light-grey", \
+     (downstream_mean-downstream_stddev) title "" with filledcurves y1=downstream_mean lt 1 lc rgb "light-grey", \
+     downstream_mean title "" with lines lw 2 lc rgb "dark-red", \
+     (upstream_mean+upstream_stddev) title "" with filledcurves y1=upstream_mean lt 1 lc rgb "light-grey", \
+     (upstream_mean-upstream_stddev) title "" with filledcurves y1=upstream_mean lt 1 lc rgb "light-grey", \
+     upstream_mean title "" with lines lw 2 lc rgb "dark-red", \
      messwerte using ($2/@MB) title "downstream" with lines lw 1 lc rgb "red", \
      messwerte using ($3/@MB) title "upstream" with lines lc rgb "blue"
 

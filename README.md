@@ -10,7 +10,7 @@ These prerequisities are required on the PI:
 
 Next you can clone this repository by using:
 
-<code><b>git clone https://github.com/mike5ch/speedtest.git</b></code>
+<code><b>git clone https://gitlab.com/mschmidl/speedtest.git</b></code>
 
 For notification I use the PUSHOVER.NET service to send error notifications and graphs to my iPhone (see the template scripts for notification). My current problems with KABEL DEUTSCHLAND produced the following notifications:
 

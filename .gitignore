@@ -1,2 +1,9 @@
 
 *.log
+logs
+SDimage
+speedtest.csv
+speedtest.mpg
+speedtest.png
+de.sysoc.speedtest.plist
+getit.sh

@@ -21,8 +21,8 @@ stats messwerte using  ($2/@MB) name  "downstream" nooutput
 stats messwerte using  ($3/@MB) name  "upstream" nooutput
 
 set output 'speedtest.png'
-set label 1 sprintf("%.f MBit, σ=%.f, %s UTC", downstream_mean, downstream_stddev, now) at 1, downstream_max+0.5 front
-set label 2 sprintf("%.f MBit, σ=%.f", upstream_mean, upstream_stddev) at 1, upstream_max+0.5 front
+set label 1 sprintf("%.f MBit, {/Symbol s}=%.f, %s UTC", downstream_mean, downstream_stddev, now) at 1, downstream_max+0.5 front
+set label 2 sprintf("%.f MBit, {/Symbol s}=%.f", upstream_mean, upstream_stddev) at 1, upstream_max+0.5 front
 plot (downstream_mean+downstream_stddev) title "" with filledcurves y1=downstream_mean lt 1 lc rgb "light-grey", \
      (downstream_mean-downstream_stddev) title "" with filledcurves y1=downstream_mean lt 1 lc rgb "light-grey", \
      downstream_mean title "" with lines lw 2 lc rgb "dark-red", \
